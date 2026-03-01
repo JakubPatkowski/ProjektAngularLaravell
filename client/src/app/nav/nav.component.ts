@@ -15,6 +15,7 @@ import { CommonModule} from "@angular/common";
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
+
 export class NavComponent implements OnInit, OnDestroy{
   loginStatus!:boolean
   subscription!: Subscription
@@ -26,7 +27,6 @@ export class NavComponent implements OnInit, OnDestroy{
       (data) => {
 
         this.loginStatus = data
-        console.log(this.loginStatus)
       }
     )
   }
@@ -35,7 +35,6 @@ export class NavComponent implements OnInit, OnDestroy{
     this.authService.logout()
 
   }
-
 
   ngOnDestroy() {
     this.subscription.unsubscribe()

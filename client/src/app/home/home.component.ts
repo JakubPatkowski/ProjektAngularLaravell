@@ -3,7 +3,6 @@ import {NavComponent} from "../nav/nav.component";
 import {DrawChartComponent} from "../draw-chart/draw-chart.component";
 import {SearchOptionsComponent} from "../search-options/search-options.component";
 import {DataTableComponent} from "../data-table/data-table.component";
-// import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-home',

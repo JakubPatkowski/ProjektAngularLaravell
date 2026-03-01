@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+/client/.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build outputs
+/client/dist/
+/client/.angular/
+
+# Laravel
+/server/storage/*.key
+/server/bootstrap/cache/*
+/server/public/hot
+/server/public/storage
+/server/.phpunit.result.cache
+
+# Docker
+.docker/
+docker-compose.override.yml

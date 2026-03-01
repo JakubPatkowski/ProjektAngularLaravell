@@ -4,7 +4,6 @@ import {Subscription} from "rxjs";
 import {AllHouseValues} from "../models/all-house-values.model";
 import {CommonModule} from "@angular/common";
 
-
 @Component({
   selector: 'app-data-table',
   standalone: true,
@@ -31,24 +30,8 @@ export class DataTableComponent implements OnInit, OnDestroy{
     this.allHouseValues = []
     this.dataSubscription = this.backendService.allHousePricesChange.subscribe((data: any)=>{
       this.allHouseValues = data
-      // console.log(this.allHouseValues)
     })
-
   }
-
-  // getData(){
-  //   this.quarters = []
-  //   this.allHouseValues.forEach((item: AllHouseValues) =>{
-  //     let i = 0
-  //     this.quarters.push(item.quarter)
-  //     item.prices.forEach((prices: number) => {
-  //       let prices = []
-  //       this.housePrices[i] =
-  //
-  //     })
-  //   })
-  //
-  // }
 
   getQuarterName(dateString: string): string {
     const date = new Date(dateString);
@@ -67,7 +50,6 @@ export class DataTableComponent implements OnInit, OnDestroy{
       case 4:
         quarterRoman = "IV"
         break
-
     }
 
     const year = date.getFullYear();
@@ -76,8 +58,6 @@ export class DataTableComponent implements OnInit, OnDestroy{
 
   downloadJSONFile() {
     const json = JSON.stringify(this.allHouseValues, null, 2);
-    // Ustawiamy drugi argument jako null, aby nie wprowadzać żadnych zmian w formatowaniu
-    // Ustawiamy trzeci argument jako 2, aby wcięcia wynosiły 2 spacje
     const blob = new Blob([json], { type: 'application/json' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -115,7 +95,6 @@ export class DataTableComponent implements OnInit, OnDestroy{
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
   }
-
 
   ngOnDestroy() {
     this.dataSubscription.unsubscribe()

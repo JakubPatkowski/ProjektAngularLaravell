@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(Request $request) //rejestracja użytkownika
+    public function register(Request $request)
     {
 
         $validator = Validator::make($request->all(),[
@@ -31,7 +31,7 @@ class AuthController extends Controller
         }
 
         if($validator->fails()){
-            return response()->json($validator->errors()); //response error message
+            return response()->json($validator->errors());
         }
 
         $user = User::create([
@@ -44,7 +44,7 @@ class AuthController extends Controller
         return response()->json(['data' => $user,'access_token' => $token,'token_type' => 'Bearer', ]);
     }
 
-    public function login(Request $request) //logowanie
+    public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json(['message' => 'Zły login lub hasło!'], 401);
@@ -54,8 +54,8 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json(['username' => $user->name,'access_token' => $token, 'token_type' => 'Bearer', ]);
     }
-    // method for user logout and delete token
 
+    // method for user logout and delete token
     public function logout()
     {
         auth()->user()->tokens()->delete();

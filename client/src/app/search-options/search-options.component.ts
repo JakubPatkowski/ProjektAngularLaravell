@@ -2,10 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {BackendService} from "../services/backend.service";
-import {DrawChartComponent} from "../draw-chart/draw-chart.component";
-import {Subject} from "rxjs";
-import {HouseValues} from "../models/house-values.model";
-import {InterestRates} from "../models/interest-rates.model";
 
 @Component({
   selector: 'app-search-options',
@@ -17,6 +13,7 @@ import {InterestRates} from "../models/interest-rates.model";
   templateUrl: './search-options.component.html',
   styleUrl: './search-options.component.scss'
 })
+
 export class SearchOptionsComponent implements OnInit {
   searchForm!: FormGroup;
   city1: string = "Bialystok"
@@ -48,14 +45,11 @@ export class SearchOptionsComponent implements OnInit {
     })
   }
 
-
   async onSubmit(){
-
 
     this.city1 = this.searchForm.value.cities ? this.searchForm.value.cities : '';
 
     this.city2 = this.searchForm.value.cities2 ? this.searchForm.value.cities2 : '';
-
 
     if(this.searchForm.value.marketType == "rynek pierwotny") this.marketType = "rynek_pierwotny"
     else if(this.searchForm.value.marketType == "rynek wtorny") this.marketType = "rynek_wtorny"
@@ -70,18 +64,6 @@ export class SearchOptionsComponent implements OnInit {
 
     await this.backendService.loadData(this.city1, this.city2, this.marketType, this.offerType, this.startDate, this.endDate)
 
-    // await this.backendService.getInterest()
-    // if(this.city2 != "Brak"){
-    //   this.backendService.setCitiesNumber(2)
-    //   await this.backendService.getHousesValues(true,this.city1, this.marketType, this.offerType, this.startDate, this.endDate)
-    //   await this.backendService.getHousesValues(false,this.city2, this.marketType, this.offerType, this.startDate, this.endDate)
-    // }else{
-    //   this.backendService.setCitiesNumber(1)
-    //   await this.backendService.getHousesValues(true,this.city1, this.marketType, this.offerType, this.startDate, this.endDate)
-    // }
     await this.backendService.getAllData(this.marketType,this.offerType, this.startDate, this.endDate)
-    // this.backendService.getData(this.marketType, this.offerType)
-
   }
-
 }

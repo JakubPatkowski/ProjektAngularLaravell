@@ -13,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rynek_pierwotny_ceny_ofertowe', function (Blueprint $table) {
-            $table->date('Kwartal'); // Kolumna Kwartal jako typ date
+            $table->date('Kwartal');
             $table->integer('Bialystok');
             $table->integer('Bydgoszcz');
             $table->integer('Gdansk');

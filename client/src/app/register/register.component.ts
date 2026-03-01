@@ -24,7 +24,7 @@ export class RegisterComponent {
     const password =this.registerForm.value.password ? this.registerForm.value.password : '';
     this.authService.register(username, email, password).subscribe(
       (data)  => {
-        console.log("zarejestrowano")
+        console.log("registered new user")
       }
     )
   }

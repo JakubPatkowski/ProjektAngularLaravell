@@ -44,6 +44,7 @@ export type ChartOptions = {
   templateUrl: './draw-chart.component.html',
   styleUrl: './draw-chart.component.scss'
 })
+
 export class DrawChartComponent implements OnInit, OnDestroy{
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions> | any;
@@ -65,7 +66,7 @@ export class DrawChartComponent implements OnInit, OnDestroy{
   setInterestValuesAndDates(interestRates: InterestRates[], houseValues: HouseValues[]) {
     let interestDates: string[] = []
     let interestValues: number[] = []
-    const housePeriods = houseValues.map(item => item.quarter.split("T")[0]); // Odcinanie końcówki daty
+    const housePeriods = houseValues.map(item => item.quarter.split("T")[0]);
     interestRates.forEach((item: InterestRates) => {
       if (housePeriods.includes(item.obowiazuje_od)) {
         interestValues.push(item.oprocentowanie);
@@ -105,16 +106,10 @@ export class DrawChartComponent implements OnInit, OnDestroy{
       housePrices2.push(item.price)
     })
 
-    console.log(housePrices)
     return {housePrices: housePrices, housePrices2: housePrices2}
   }
 
   initializeChart(housePrices1: number[], housePrices2: number[], interestValues: number[], interestDates: string[], cityName1: string, cityName2: string, citiesNumber: number) {
-    // console.log("initialize chart")
-    // console.log(housePrices1.length)
-    // console.log(housePrices2.length)
-    // console.log(interestValues.length)
-    // console.log(interestDates.length)
     if(citiesNumber == 1){
       this.chartOptions = {
         series: [
@@ -150,7 +145,7 @@ export class DrawChartComponent implements OnInit, OnDestroy{
         yaxis: [
           {
             title: {
-              text: cityName1+"zł / m^2"
+              text: cityName1+" zł / m^2"
             }
           },
           {
@@ -223,10 +218,6 @@ export class DrawChartComponent implements OnInit, OnDestroy{
                 color: "#008FFB"
               }
             },
-            // tooltip: {
-            //   enabled: true
-            // },
-
           },
           {
             seriesName: "Ceny miszkań",
@@ -285,11 +276,7 @@ export class DrawChartComponent implements OnInit, OnDestroy{
     }
   }
 
-
   ngOnDestroy() {
     this.dataSubscription.unsubscribe()
   }
-
-
-
 }

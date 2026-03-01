@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
-import {ActivatedRoute} from "@angular/router";
+import { environment } from '../../environments/environment';
 import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  API = 'http://127.0.0.1:8000/api'; // Ensure this is a complete URL
+  API = environment.apiUrl;
   constructor(private http: HttpClient, private router: Router) {}
 
   private loginStatus!: boolean
@@ -21,7 +21,6 @@ export class AuthService {
     let params = new HttpParams()
     params = params.append('email', email )
     params = params.append('password', password)
-    console.log(params)
     return this.http.post<any>(`${this.API}/login`, {},
       {
         params : params
@@ -87,8 +86,6 @@ export class AuthService {
     this.loginStatus = false
     this.loginChange.next(this.loginStatus)
     localStorage.clear()
-    console.log("wylogowano")
+    console.log("logged out")
   }
-
-
 }
